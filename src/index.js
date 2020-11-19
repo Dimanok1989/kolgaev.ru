@@ -5,7 +5,7 @@ import 'semantic-ui-css/semantic.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/app.css';
 
-import App from './Components/App';
+import App from './App';
 // import reportWebVitals from './reportWebVitals';
 
 import Echo from 'laravel-echo';

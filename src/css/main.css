@@ -1,0 +1,15 @@
+.main-header {
+    width: 100%;
+    height: 350px;
+    background-color:#1d2334;
+}
+
+.welcome-title {
+    font-size: 54px;
+    font-weight: 500;
+}
+
+.image-logo {
+    margin-top: 5px;
+    margin-right: .45rem;
+}

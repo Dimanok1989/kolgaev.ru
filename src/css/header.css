@@ -1,0 +1,34 @@
+.bg-my-header {
+    background: #1d2332;
+    color: #5e80e4;
+}
+
+.header-link, .header-link:active { color: #ffffff; }
+.header-link:hover  { color: #eeecec; text-decoration: none; }
+
+.logined-header {
+    right: 0;
+    margin-top: -0.1em;
+}
+.logined-header .avatar {
+    width: 2em;
+    height: 2em;
+    border-radius: 500rem;
+    z-index: 1;
+}
+.logined-header .avatar:hover,
+.avatar-no-image:hover {
+    opacity: .9;
+}
+
+.avatar-no-image {
+    width: 2em;
+    height: 2em;
+    border-radius: 500rem;
+    z-index: 1;
+    background-color: #5e80e4;
+}
+
+.loading-header-dimmer {
+    border-radius: 50%;
+}

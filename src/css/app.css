@@ -10,11 +10,8 @@
 }
 
 .header-menu, .content-files {
-    max-width: 1230px;
+    max-width: 1300px;
 }
-
-.header-link, .header-link:active { color: #ffffff; }
-.header-link:hover  { color: #eeecec; text-decoration: none; }
 
 .bg-login-block {
     background: url('//api.kolgaev.ru/css/header/header.jpg') no-repeat;

@@ -1,12 +1,12 @@
 import React from 'react';
-import axios from '../Utils/axios';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import axios from './Utils/axios';
 import { Spinner } from 'react-bootstrap';
 
-import Login from './App/Login';
-import Header from './App/Header';
-import Content from './App/Content';
-import DownloadPage from './App/Download';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import NotFound from './Components/NotFound';
+import Header from './Components/Header/Header';
+import Main from './Components/Main/Main';
 
 class App extends React.Component {
 
@@ -23,12 +23,11 @@ class App extends React.Component {
 
     componentDidMount() {
 
-        // Проверка авторизации
-        this.checkLogin();
+        this.checkLogin(); // Проверка авторизации
 
     }
 
-    loginClick = (e) => {
+    loginClick = e => {
 
         this.setState({ isLogin: !this.state.isLogin });
 
@@ -42,15 +41,12 @@ class App extends React.Component {
 
     /**
      * Метод проверки авторизации
-     * @return {null}
      */
     checkLogin = () => {
 
         axios.post(`auth/user`).then(({ data }) => {
 
             this.setState({ isLogin: true });
-
-            localStorage.setItem('user', data.id); // Идентификатор пользователя
             window.user = data;
 
         }).catch(error => {
@@ -73,18 +69,13 @@ class App extends React.Component {
             )
         }
 
-        if (!this.state.isLogin)
-            return <Login logined={this.logined} />
-
         return (
             <BrowserRouter>
                 <div>
-                    <Header isLogin={this.state.isLogin} />
+                    <Header isLogin={this.state.isLogin} logout={() => this.setState({ isLogin: false })} logined={() => this.setState({ isLogin: true })} />
                     <Switch>
-                        <Route path="/download/:id" component={DownloadPage} />
-                        <Route path="/download" component={DownloadPage} />
-                        <Route path="/" component={Content} />
-                        {/* <Route path="*" component={NotFound} /> */}
+                        <Route exact path="/" component={Main} />
+                        <Route component={NotFound} />
                     </Switch>
                 </div>
             </BrowserRouter>
