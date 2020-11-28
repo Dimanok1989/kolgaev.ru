@@ -4,11 +4,18 @@
     right: 0;
     bottom: 0;
 }
+
 .loading-modal {
     background-color: #ffffffc4;
     z-index: 1;
 }
 
+.my-content {
+    padding-top: 50px;
+}
+
+
+/* 
 .header-menu, .content-files {
     max-width: 1300px;
 }
@@ -206,3 +213,7 @@
 }
 .lite-box-back { left: 10px; }
 .lite-box-next { right: 10px; }
+
+a.item:hover {
+    text-decoration: none;
+} */

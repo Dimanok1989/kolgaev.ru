@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import axios from './../../Utils/axios';
 import Cookies from 'js-cookie';
@@ -6,7 +7,7 @@ import Cookies from 'js-cookie';
 import Avatar from './../App/Users/Avatar';
 
 // import Icon from './../../Utils/FontAwesomeIcon'
-import { Dropdown, Dimmer, Loader } from 'semantic-ui-react'
+import { Dropdown, Dimmer, Loader, Icon } from 'semantic-ui-react'
 
 class User extends React.Component {
 
@@ -50,7 +51,8 @@ class User extends React.Component {
         const avatar = <Avatar name={window.user.name} surname={window.user.surname} img={window.user.avatar || null} />
 
         return (
-            <div className="position-absolute mr-3 logined-header cursor-pointer">
+            <div className="position-absolute logined-header cursor-pointer">
+                
                 <Dimmer active={this.state.loading} className="loading-header-dimmer">
                     <Loader size="mini" />
                 </Dimmer>
@@ -58,6 +60,10 @@ class User extends React.Component {
                 <Dropdown trigger={avatar} icon={null} pointing='top right'>
 
                     <Dropdown.Menu>
+                        <Link to="/profile" role="option" className="item">
+                            <Icon name="user" />
+                            <span className="text">Профиль</span>
+                        </Link>
                         <Dropdown.Item icon="sign out" text='Выход' onClick={this.logout} />
                     </Dropdown.Menu>
 

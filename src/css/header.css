@@ -1,6 +1,15 @@
 .bg-my-header {
-    background: #1d2332;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #1d2332e5;
     color: #5e80e4;
+    z-index: 100;
+}
+
+.header-menu {
+    max-width: 1200px;
 }
 
 .header-link, .header-link:active { color: #ffffff; }

@@ -20,20 +20,31 @@ class Main extends React.Component {
     render() {
 
         return (
-            <div id="header-image" className="main-header position-relative">
+            <>
 
-                <div id="header-gradient" className="position-absolute w-100 h-100 main-header-bg-grd"></div>
+                <div id="header-image" className="main-header position-relative">
 
-                <div className="position-absolute w-100 h-100 text-center text-light d-flex justify-content-center align-items-center">
-                    
-                    <div className="header-title-in-bg d-flex align-items-center">
-                        <img src="/logo192.jpg" width="46" height="46" className="image-logo rounded shadow" alt="Kolgaev.ru" />
-                        <span className="welcome-title">Кolgaev.ru</span>
+                    <div id="header-gradient" className="position-absolute w-100 h-100 main-header-bg-grd"></div>
+
+                    <div className="position-absolute w-100 h-100 text-center text-light d-flex justify-content-center align-items-center">
+
+                        <div className="header-title-in-bg d-flex align-items-center">
+                            <img src="/logo192.jpg" width="46" height="46" className="image-logo rounded shadow" alt="Kolgaev.ru" />
+                            <span className="welcome-title">Кolgaev.ru</span>
+                        </div>
+
                     </div>
 
                 </div>
 
-            </div>
+                {/* <div className="text-center my-4">
+                    <h3 className="font-weight-bold">Добро пожаловать!</h3>
+                    <div>
+                        <span></span>
+                    </div>
+                </div> */}
+
+            </>
         )
 
     }

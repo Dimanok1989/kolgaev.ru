@@ -32,6 +32,9 @@ class Login extends React.Component {
 
     }
 
+    /**
+     * Открытие модального окна авторизации
+     */
     authOpen = () => {
 
         this.setState({
@@ -43,6 +46,9 @@ class Login extends React.Component {
 
     }
 
+    /**
+     * Открытие модального окна регистрации
+     */
     registrationOpen = () => {
 
         this.setState({
@@ -54,6 +60,9 @@ class Login extends React.Component {
 
     }
 
+    /**
+     * Авторизация пользователя
+     */
     login = () => {
 
         this.setState({ process: true });
@@ -85,6 +94,9 @@ class Login extends React.Component {
 
     }
 
+    /**
+     * Регистрация пользователя
+     */
     registration = () => {
 
         this.setState({ process: true });
@@ -154,7 +166,7 @@ class Login extends React.Component {
                     </Dimmer>
 
                     <form id="auth-form">
-                        <Input placeholder="Логин, телефон или e-mail" className="w-100 my-1" name="login" onKeyUp={e => e.keyCode === 13 ? this.login() : null} />
+                        <Input placeholder="Логин, телефон или e-mail" className="w-100 my-1" name="email" onKeyUp={e => e.keyCode === 13 ? this.login() : null} />
                         <Input placeholder="Пароль" className="w-100 my-1" type="password" name="password" onKeyUp={e => e.keyCode === 13 ? this.login() : null} />
                     </form>
 
@@ -257,7 +269,7 @@ class Login extends React.Component {
                 {auth}
                 {registration}
 
-                <div className="position-absolute mr-3 logined-header cursor-pointer">
+                <div className="position-absolute logined-header cursor-pointer">
 
                     <Dimmer active={this.state.loading} className="loading-header-dimmer">
                         <Loader size="mini" />
