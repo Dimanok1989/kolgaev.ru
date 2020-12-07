@@ -45,3 +45,10 @@
 .valid-message {
     display: inline-block;
 }
+
+.nav-menu-point:hover {
+    text-decoration: none;
+}
+.nav-menu-point.nav-menu-active {
+    font-weight: 700 !important;
+}

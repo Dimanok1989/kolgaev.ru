@@ -9,6 +9,8 @@ import Header from './Components/Header/Header';
 import Main from './Components/Main/Main';
 
 import Profile from './Components/App/Users/Profile';
+import Fuel from './Components/App/Fuel/Fuel';
+import FuelsCar from './Components/App/Fuel/FuelsCar';
 
 import Echo from 'laravel-echo';
 window.io = require('socket.io-client');
@@ -23,6 +25,7 @@ class App extends React.Component {
             loading: true,
             isLogin: false,
             online: [],
+            menu: [],
         };
 
     }
@@ -46,21 +49,24 @@ class App extends React.Component {
     /**
      * Метод проверки авторизации
      */
-    checkLogin = () => {
+    checkLogin = async () => {
 
-        axios.post(`auth/user`).then(({ data }) => {
+        await axios.post(`auth/user`, { menu: true }).then(({ data }) => {
 
-            this.setState({ isLogin: true });
             window.user = data.user;
+            window.menu = data.menu;
+
+            this.setState({
+                isLogin: true,
+                menu: data.menu
+            });
 
             this.connectEcho();
 
         }).catch(error => {
 
         }).then(() => {
-
             this.setState({ loading: false });
-
         });
 
     }
@@ -122,10 +128,12 @@ class App extends React.Component {
         return (
             <BrowserRouter>
                 <div>
-                    <Header isLogin={this.state.isLogin} logout={() => this.setState({ isLogin: false })} logined={this.logined} />
+                    <Header isLogin={this.state.isLogin} logout={() => this.setState({ isLogin: false })} logined={this.logined} menu={this.state.menu} />
                     <Switch>
                         <Route exact path="/" component={Main} />
                         <Route exact path="/profile" component={Profile} />
+                        <Route exact path="/fuel" component={Fuel} />
+                        <Route exact path="/fuel/:id" component={FuelsCar} />
                         <Route component={NotFound} />
                     </Switch>
                 </div>

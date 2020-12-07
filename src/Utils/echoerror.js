@@ -1,6 +1,6 @@
 const echoerror = error => {
 
-    if (error.response) {
+    if (typeof error.response == "object") {
 
         if (error.response.data) {
 

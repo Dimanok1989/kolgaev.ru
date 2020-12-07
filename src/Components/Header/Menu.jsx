@@ -1,75 +1,46 @@
 import React from 'react';
 
-import { Dropdown, Icon, Input, Menu } from 'semantic-ui-react'
+import MenuPoint from './MenuPoint'
+import { Dropdown, Icon } from 'semantic-ui-react'
 
 class MenuComponent extends React.Component {
 
-    state = {}
+    state = {
+        activeItem: null,
+    }
 
-    handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+    handleItemClick = (e, { icon }) => this.setState({ activeItem: icon })
 
     render() {
 
-        const activeItem = this.state
+        let points = [
+            { to: "/", icon: "home", text: "Главная страница" }
+        ];
+
+        if (this.props.menu.indexOf("menu.admin") >= 0)
+            points.push({ href: "//admin.kolgaev.ru", icon: "shield", text: "Админ-панель" });
+
+        if (this.props.menu.indexOf("menu.fuel") >= 0)
+            points.push({ to: "/fuel", icon: "car", text: "Авторасходы", exact: false });
+
+        if (this.props.menu.indexOf("menu.disk") >= 0)
+            points.push({ href: "//disk.kolgaev.ru", icon: "disk", text: "Диск" });
+
+        const items = points.map((item, key) => <MenuPoint key={key} {...item} />)
 
         return (
-            <Menu vertical>
-                <Menu.Item>
-                    <Input placeholder='Search...' />
-                </Menu.Item>
-
-                <Menu.Item>
-                    Home
-                <Menu.Menu>
-                        <Menu.Item
-                            name='search'
-                            active={activeItem === 'search'}
-                            onClick={this.handleItemClick}
-                        >
-                            Search
-                  </Menu.Item>
-                        <Menu.Item
-                            name='add'
-                            active={activeItem === 'add'}
-                            onClick={this.handleItemClick}
-                        >
-                            Add
-                  </Menu.Item>
-                        <Menu.Item
-                            name='about'
-                            active={activeItem === 'about'}
-                            onClick={this.handleItemClick}
-                        >
-                            Remove
-                  </Menu.Item>
-                    </Menu.Menu>
-                </Menu.Item>
-
-                <Menu.Item
-                    name='browse'
-                    active={activeItem === 'browse'}
-                    onClick={this.handleItemClick}
-                >
-                    <Icon name='grid layout' />
-                Browse
-              </Menu.Item>
-                <Menu.Item
-                    name='messages'
-                    active={activeItem === 'messages'}
-                    onClick={this.handleItemClick}
-                >
-                    Messages
-              </Menu.Item>
-
-                <Dropdown item text='More'>
-                    <Dropdown.Menu>
-                        <Dropdown.Item icon='edit' text='Edit Profile' />
-                        <Dropdown.Item icon='globe' text='Choose Language' />
-                        <Dropdown.Item icon='settings' text='Account Settings' />
-                    </Dropdown.Menu>
-                </Dropdown>
-            </Menu>
-        );
+            <Dropdown
+                icon={null}
+                trigger={<Icon name="bars" className="mr-2 item-hover" size="large" />}
+            >
+                <Dropdown.Menu>
+                    <Dropdown.Header content="Главное меню" />
+                    <Dropdown.Divider />
+                    {items}
+                    {/* <Dropdown.Item icon="conversation" text="Discussion" /> */}
+                </Dropdown.Menu>
+            </Dropdown>
+        )
 
     }
 
