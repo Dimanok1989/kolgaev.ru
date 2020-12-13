@@ -8,11 +8,13 @@ import './../../../css/fuel.css'
 
 import NotFound from './../../NotFound'
 import FuelRow from './FuelRow'
+import AddFuelRow from './AddFuelRow'
 // import Image from 'react-bootstrap/Image'
 
 class FuelsCar extends React.Component {
 
     state = {
+        car: {},
         loading: true,
         redirect: null,
         notFound: null,
@@ -53,8 +55,23 @@ class FuelsCar extends React.Component {
 
     }
 
-    showAddCar = () => {
-        console.log("Добавить машину");
+    addFuel = refuel => {
+
+        let index = null,
+            fuels = this.state.fuels;
+
+        fuels.forEach((fuel, idx) => {
+            if (Number(fuel.mileage) > Number(refuel.mileage))
+                index = idx;
+        });
+
+        if (index === null)
+            fuels.unshift(refuel);
+        else
+            fuels.splice(index + 1, 0, refuel);
+
+        this.setState({ fuels });
+
     }
 
     render() {
@@ -69,12 +86,22 @@ class FuelsCar extends React.Component {
             ? <Loader className="mt-3" active inline="centered" />
             : null
 
+        const addFuel = !this.state.loading && this.state.car.user === window.user.id
+            ? <div className="text-center">
+                <AddFuelRow addFuel={this.addFuel} />
+            </div>
+            : null
+
         const fuels = this.state.fuels.map(fuel => <FuelRow key={fuel.id} fuel={fuel} />)
 
         return <div className="my-content">
-            
+
             <div className="car-content">
+
+                {addFuel}
+
                 <Item.Group>{fuels}</Item.Group>
+
             </div>
 
             {loading}

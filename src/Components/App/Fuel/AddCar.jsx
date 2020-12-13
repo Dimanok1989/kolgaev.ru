@@ -82,7 +82,7 @@ class AddCar extends React.Component {
                             />
                         </Form.Group>
 
-                        <Form.Group controlId="add-car-brand">
+                        <Form.Group controlId="add-car-modification">
                             <Form.Label className="mb-1">Модификация</Form.Label>
                             <Form.Control
                                 type="text"
@@ -94,13 +94,13 @@ class AddCar extends React.Component {
 
                         <Row>
                             <Col>
-                                <Form.Group controlId="add-car-brand">
+                                <Form.Group controlId="add-car-year">
                                     <Form.Label className="mb-1">Год выпуска</Form.Label>
                                     <Form.Control type="number" placeholder="Укажите год выпуска..." name="year" max="2999" />
                                 </Form.Group>
                             </Col>
                             <Col>
-                                <Form.Group controlId="add-car-brand">
+                                <Form.Group controlId="add-car-volume">
                                     <Form.Label className="mb-1">Объём двигателя</Form.Label>
                                     <Form.Control type="number" placeholder="Укажите объём..." name="volume" step="0.1" max="36" />
                                 </Form.Group>
