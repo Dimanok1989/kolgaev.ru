@@ -27,9 +27,9 @@ class CarCard extends React.Component {
                     className="car-card"
                 >
                     <Image src={image} wrapped ui={false} />
-                    <Card.Content>
+                    <Card.Content title={model}>
                         <Card.Header>{car.brand}</Card.Header>
-                        {model ? <Card.Meta>{model}</Card.Meta> : null}
+                        {model ? <Card.Meta className="title-car">{model}</Card.Meta> : null}
                     </Card.Content>
 
                     <div className="hover-row"></div>

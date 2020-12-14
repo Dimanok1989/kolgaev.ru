@@ -18,15 +18,34 @@ class FuelsCar extends React.Component {
         loading: true,
         redirect: null,
         notFound: null,
-        page: 1,
+        
         fuels: [],
+        page: 1,
+        progress: true,
+        endrows: false
+
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
+
         this.getFuelsCar();
+
+        document.addEventListener('scroll', this.onScrollList);
+
+    }
+
+    componentWillUnmount = () => {
+
+        document.removeEventListener('scroll', this.onScrollList);
+
     }
 
     getFuelsCar = () => {
+
+        this.setState({
+            loading: true,
+            progress: true
+        });
 
         let formdata = {
             id: this.props.match.params.id,
@@ -35,9 +54,17 @@ class FuelsCar extends React.Component {
 
         axios.post('fuel/getFuelsCar', formdata).then(({ data }) => {
 
+            let fuels = this.state.fuels;
+
+            data.fuels.forEach(fuel => {
+                fuels.push(fuel);
+            });
+
             this.setState({
+                fuels,
                 car: data.car,
-                fuels: data.fuels
+                page: data.next,
+                endrows: data.next > data.last
             });
 
         }).catch(error => {
@@ -50,7 +77,10 @@ class FuelsCar extends React.Component {
             }
 
         }).then(() => {
-            this.setState({ loading: false });
+            this.setState({
+                loading: false,
+                progress: false
+            });
         });
 
     }
@@ -74,6 +104,14 @@ class FuelsCar extends React.Component {
 
     }
 
+    onScrollList = e => {
+
+        if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100 && !this.state.progress && !this.state.endrows) {
+            this.getFuelsCar();
+        }
+
+    }
+
     render() {
 
         if (this.state.notFound === true)
@@ -83,7 +121,7 @@ class FuelsCar extends React.Component {
             return <Redirect to="/login" />
 
         const loading = this.state.loading
-            ? <Loader className="mt-3" active inline="centered" />
+            ? <Loader active inline="centered" />
             : null
 
         const addFuel = !this.state.loading && this.state.car.user === window.user.id

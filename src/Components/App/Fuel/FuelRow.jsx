@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Item, Statistic } from 'semantic-ui-react'
+import { Item } from 'semantic-ui-react'
 import FontIcon from './../../../Utils/FontAwesomeIcon'
 
 class FuelRow extends React.Component {
@@ -8,51 +8,62 @@ class FuelRow extends React.Component {
     render() {
 
         const fuel = this.props.fuel;
+        const lost = fuel.lost === 1
+            ? <FontIcon icon={['fas', 'exclamation-circle']} className="text-warning lost-fuel" title="Забыл записать предыдущую заправку" />
+            : null
 
         let color = fuel.full === 1 ? "#3ccc18" : "#a0afbd";
 
+
         return (
+
             <Item className="mb-5 px-3">
 
-                <div className="ui tiny image">
-                    <FontIcon icon={['fas', 'gas-pump']} size="4x" color={color} className="mx-auto" />
-                    <div className="text-center mt-2">{fuel.type}</div>
-                </div>
+                <div className="d-flex align-items-center w-100">
 
-                <Item.Content>
-
-                    <div className="d-flex justify-content-between align-items-center">
-                        <h5 className="mb-0 font-weight-bold">{fuel.gas_station}</h5>
-                        <small className="text-muted">{fuel.date}</small>
+                    <div className="pr-4 d-flex flex-column justify-content-center position-relative">
+                        <FontIcon icon={['fas', 'gas-pump']} size="3x" color={color} className="mx-auto" />
+                        {lost}
+                        <div className="text-center mt-2 title-type-fuel">{fuel.type}</div>
                     </div>
 
-                    <Statistic.Group className="justify-content-center flex-wrap" size="mini">
+                    <div className="px-2 d-flex flex-column justify-content-center align-items-stretch flex-grow-1">
 
-                        <Statistic>
-                            <Statistic.Value>{fuel.mileage}</Statistic.Value>
-                            <Statistic.Label>Пробег</Statistic.Label>
-                        </Statistic>
+                        <div className="d-flex justify-content-between align-items-center mb-1">
+                            <h5 className="mb-0 font-weight-bold">{fuel.gas_station}</h5>
+                            <small className="text-muted">{fuel.date}</small>
+                        </div>
 
-                        <Statistic>
-                            <Statistic.Value>{fuel.liters}</Statistic.Value>
-                            <Statistic.Label>Литры</Statistic.Label>
-                        </Statistic>
+                        <div className="d-flex justify-content-between align-items-center">
+                            
+                            <div className="statistic-refuel-row">
+                                <div className="statistic-value">{fuel.mileage}</div>
+                                <div className="statistic-title">Пробег</div>
+                            </div>
 
-                        <Statistic>
-                            <Statistic.Value>{fuel.price}</Statistic.Value>
-                            <Statistic.Label>Цена</Statistic.Label>
-                        </Statistic>
+                            <div className="statistic-refuel-row">
+                                <div className="statistic-value">{fuel.liters}</div>
+                                <div className="statistic-title">Литры</div>
+                            </div>
 
-                        <Statistic>
-                            <Statistic.Value>{(fuel.liters * fuel.price).toFixed(2)}</Statistic.Value>
-                            <Statistic.Label>Стоимость</Statistic.Label>
-                        </Statistic>
+                            <div className="statistic-refuel-row">
+                                <div className="statistic-value">{fuel.price}</div>
+                                <div className="statistic-title">Цена</div>
+                            </div>
 
-                    </Statistic.Group>
+                            <div className="statistic-refuel-row">
+                                <div className="statistic-value">{(fuel.liters * fuel.price).toFixed(2)}</div>
+                                <div className="statistic-title">Стоимость</div>
+                            </div>
 
-                </Item.Content>
+                        </div>
+                        
+                    </div>
+
+                </div>
 
             </Item>
+
         )
 
     }

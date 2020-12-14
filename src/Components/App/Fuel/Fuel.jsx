@@ -86,7 +86,7 @@ class Fuel extends React.Component {
                     onClick={this.showAddCar}
                     className="car-card m-1 cursor-pointer"
                 >
-                    <div className="d-flex justify-content-center align-items-center flex-column h-100">
+                    <div className="d-flex justify-content-center align-items-center flex-column h-100 py-3">
                         <Icon name="plus circle" size="huge" color="grey" />
                         <small className="mt-2">Добавить машину</small>
                     </div>
@@ -94,8 +94,10 @@ class Fuel extends React.Component {
                 </Card> : null}
 
             </Card.Group>
+
             {loading}
-        </div>;
+
+        </div>
 
     }
 

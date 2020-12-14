@@ -28,3 +28,35 @@
     width: 100%;
     max-width: 500px;
 }
+
+.title-car {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.statistic-refuel-row {
+    margin: .25rem;
+    text-align: center;
+    padding: 0 .25rem;
+    text-transform: uppercase;
+}
+.statistic-refuel-row .statistic-value {
+    font-weight: 400;
+    font-size: 130%;
+}
+.statistic-refuel-row .statistic-title {
+    font-weight: 700;
+}
+
+.lost-fuel {
+    position: absolute;
+    top: 0;
+    right: 6px;
+    z-index: 1;
+}
+
+.title-type-fuel {
+    opacity: .7;
+    font-size: 80%;
+}
