@@ -1,6 +1,6 @@
 .main-header {
     width: 100%;
-    height: 350px;
+    height: 400px;
     background-color:#1d2334;
 }
 
@@ -12,4 +12,67 @@
 .image-logo {
     margin-top: 5px;
     margin-right: .45rem;
+    box-shadow: 0 .5rem 1rem rgba(255,255,255,.15);
+}
+
+.sub-title-head {
+    font-size: 120%;
+}
+
+.main-block {
+    --main-block-color: #000000;
+    --main-block-bg: #ffffff;
+}
+.main-block.auto-expenses {
+    --main-block-color: #ffffff;
+    --main-block-bg: #174965;
+}
+.main-block.footer {
+    --main-block-color: #ffffff;
+    --main-block-bg: #1d2332;
+}
+
+.main-block {
+    position: relative;
+    width: 100%;
+    color: var(--main-block-color);
+    background: var(--main-block-bg);
+}
+
+.main-block-content {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1000px;
+    padding: 7rem .5rem;
+}
+
+.main-block-title {
+    font-size: 3rem;
+}
+
+.main-block:before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    width: 0;
+    height: 0;
+    border-bottom: 30px solid var(--main-block-bg); 
+    border-right: 100vw solid transparent;  
+}
+
+.max-sm {
+    max-width: 500px;
+}
+.max-lg {
+    max-width: 650px;
+}
+
+.footer-link {
+    color: #ffffff;
+    opacity: .7;
+}
+.footer-link:hover {
+    color: #ffffff;
+    opacity: 1;
+    text-decoration: none;
 }

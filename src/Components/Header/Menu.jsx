@@ -21,7 +21,7 @@ class MenuComponent extends React.Component {
             points.push({ href: "//admin.kolgaev.ru", icon: "shield", text: "Админ-панель" });
 
         if (this.props.menu.indexOf("menu.fuel") >= 0)
-            points.push({ to: "/fuel", icon: "car", text: "Авторасходы", exact: false });
+            points.push({ to: "/fuel", icon: "car", text: "Авто расходы", exact: false });
 
         if (this.props.menu.indexOf("menu.disk") >= 0)
             points.push({ href: "//disk.kolgaev.ru", icon: "disk", text: "Диск" });

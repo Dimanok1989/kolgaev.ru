@@ -42,7 +42,21 @@ class App extends React.Component {
     logined = async () => {
 
         await this.connectEcho(); // Подключение к широковещанию
+        await this.updateMenuPoints(); // Получение списка меню
+
         this.setState({ isLogin: true });
+
+    }
+
+    /**
+     * Деавторизация пользователя
+     */
+    logout = () => {
+
+        this.setState({
+            isLogin: false,
+            menu: [],
+        });
 
     }
 
@@ -67,6 +81,19 @@ class App extends React.Component {
 
         }).then(() => {
             this.setState({ loading: false });
+        });
+
+    }
+
+    /**
+     * Обновление пунктов меню
+     */
+    updateMenuPoints = async () => {
+
+        await axios.post('auth/getMenu').then(({ data }) => {
+
+            this.setState({ menu: data.menu });
+
         });
 
     }
@@ -128,9 +155,9 @@ class App extends React.Component {
         return (
             <BrowserRouter>
                 <div>
-                    <Header isLogin={this.state.isLogin} logout={() => this.setState({ isLogin: false })} logined={this.logined} menu={this.state.menu} />
+                    <Header isLogin={this.state.isLogin} logout={this.logout} logined={this.logined} menu={this.state.menu} />
                     <Switch>
-                        <Route exact path="/" component={Main} />
+                        <Route exact path="/" component={() => <Main menu={this.state.menu} />} />
                         <Route exact path="/profile" component={Profile} />
                         <Route exact path="/fuel" component={Fuel} />
                         <Route exact path="/fuel/:id" component={FuelsCar} />
