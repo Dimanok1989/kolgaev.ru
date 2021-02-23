@@ -1,5 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { setFuelAddShow } from './../../../store/fuel/actions'
 
 import axios from '../../../Utils/axios'
 import { messageError, errors } from '../../../Utils/axioserror'
@@ -122,7 +124,10 @@ class AddFuelRow extends React.Component {
 
         return <>
 
-            <button className="btn btn-dark" onClick={this.showAddFuel}>Добавить заправку</button>
+            <button className="btn btn-dark" onClick={() => {
+                this.showAddFuel();
+                this.props.setFuelAddShow(true);
+            }}>Добавить заправку</button>
 
             <Modal
                 show={this.state.show}
@@ -265,4 +270,14 @@ class AddFuelRow extends React.Component {
 
 }
 
-export default withRouter(AddFuelRow);
+const mapStateToProps = state => {
+    return {
+        showAdd: state.fuel.showAdd
+    }
+}
+
+const mapDispatchToProps = {
+    setFuelAddShow,
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AddFuelRow));

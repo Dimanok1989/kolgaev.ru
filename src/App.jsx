@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
 import axios from './Utils/axios';
 import { Spinner } from 'react-bootstrap';
+import { YMInitializer } from 'react-yandex-metrika';
 
 import NotFound from './Components/NotFound';
 import Header from './Components/Header/Header';
@@ -144,26 +144,29 @@ class App extends React.Component {
 
     render() {
 
-        if (this.state.loading) {
-            return (
-                <div className="d-flex justify-content-center align-items-center position-absolute loading-app">
-                    <Spinner animation="border" variant="dark" />
-                </div>
-            )
-        }
+        const metrika = process.env.REACT_APP_METRIKA === "true"
+            ? <YMInitializer accounts={[44940325]} options={{webvisor: true}} version="2" />
+            : null
+
+        const body = this.state.loading
+            ? <div className="d-flex justify-content-center align-items-center position-absolute loading-app">
+                <Spinner animation="border" variant="dark" />
+            </div>
+            : <div>
+                <Header isLogin={this.state.isLogin} logout={this.logout} logined={this.logined} menu={this.state.menu} />
+                <Switch>
+                    <Route exact path="/" component={() => <Main menu={this.state.menu} />} />
+                    <Route exact path="/profile" component={Profile} />
+                    <Route exact path="/fuel" component={Fuel} />
+                    <Route exact path="/fuel/:id" component={FuelsCar} />
+                    <Route component={NotFound} />
+                </Switch>
+            </div>
 
         return (
             <BrowserRouter>
-                <div>
-                    <Header isLogin={this.state.isLogin} logout={this.logout} logined={this.logined} menu={this.state.menu} />
-                    <Switch>
-                        <Route exact path="/" component={() => <Main menu={this.state.menu} />} />
-                        <Route exact path="/profile" component={Profile} />
-                        <Route exact path="/fuel" component={Fuel} />
-                        <Route exact path="/fuel/:id" component={FuelsCar} />
-                        <Route component={NotFound} />
-                    </Switch>
-                </div>
+                {body}
+                {metrika}
             </BrowserRouter>
         )
 
